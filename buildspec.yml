@@ -25,5 +25,6 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"nodejs-ecs-Container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json 
+      - $(aws ecs update-service --cluster nodejs-ecs-cluster-plain --service nodejs-ecs-Service --force-new-deployment)
 artifacts:
     files: imagedefinitions.json
